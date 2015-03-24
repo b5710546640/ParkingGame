@@ -12,6 +12,11 @@
 
     "jsList" : [
         "src/resource.js",
-        "src/app.js"
+        "src/app.js",
+        "src/Airplane.js",
+        "src/Car.js",
+        "src/Ship.js",
+        "src/Ufo.js",
+        "src/BoardGame.js"
     ]
 }

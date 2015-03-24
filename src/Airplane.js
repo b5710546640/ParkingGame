@@ -1,8 +1,8 @@
-var Ship = cc.Sprite.extend({
+var Airplane = cc.Sprite.extend({
 
     ctor: function() {
         this._super();
-        this.initWithFile( 'res/ship.png' );
+        this.initWithFile( '##########' );
     },
 
     update: function( dt ) {

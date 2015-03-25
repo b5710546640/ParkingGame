@@ -2,7 +2,7 @@ var Airplane = cc.Sprite.extend({
 
     ctor: function() {
         this._super();
-        this.initWithFile( '##########' );
+        this.initWithFile( 'res/airplane.png' );
     },
 
     update: function( dt ) {

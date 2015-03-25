@@ -1,4 +1,6 @@
 var BoardGame = cc.LayerColor.extend({
+
+
     init: function() {
         this._super( new cc.Color( 127, 127, 127, 255 ));
         this.setPosition( new cc.Point( 0, 0 ) );
@@ -7,33 +9,49 @@ var BoardGame = cc.LayerColor.extend({
         
         this.ship = new Ship();
         this.ship.setPosition( new cc.Point( 0, 0 ) );
-        
+
+        this.setBackground = new cc.Sprite.create("res/bg.jpg");
+        this.setBackground.setPosition(new cc.Point(screenWidth/2,screenHeight/2));
+        this.addChild(this.setBackground);
+
         this.addKeyboardHandlers();
         this.addChild( this.ship );
         this.ship.scheduleUpdate();
 
         this.car = new Car();
-        this.car.setPosition( new cc.Point( 200, 200 ) );
+        this.car.setPosition( new cc.Point( 0, 0 ) );
         
         this.addKeyboardHandlers();
         this.addChild( this.car );
         this.car.scheduleUpdate();
 
         this.airplane = new Airplane();
-        this.airplane.setPosition( new cc.Point( 200, 200 ) );
+        this.airplane.setPosition( new cc.Point( 0, 0 ) );
         
         this.addKeyboardHandlers();
         this.addChild( this.airplane );
         this.airplane.scheduleUpdate();
 
         this.ufo = new Ufo();
-        this.ufo.setPosition( new cc.Point( 200, 200 ) );
-        
+        this.ufo.setPosition( new cc.Point( screenWidth,screenHeight ) );
         this.addKeyboardHandlers();
         this.addChild( this.ufo );
         this.ufo.scheduleUpdate();
 
         return true;
+    },
+
+        addKeyboardHandlers: function() {
+        var self = this;
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyPressed : function( keyCode, event ) {
+                self.onKeyDown( keyCode, event );
+            },
+            onKeyReleased: function( keyCode, event ) {
+                self.onKeyUp( keyCode, event );
+            }
+        }, this);
     }
 
 });

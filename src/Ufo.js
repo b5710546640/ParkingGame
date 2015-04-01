@@ -7,14 +7,14 @@ var Ufo = cc.Sprite.extend({
 
     update: function( dt ) {
 		var pos = this.getPosition();
-		if( this.direction == Ship.DIR.UP){
+		if( this.direction == Ufo.DIR.UP){
 			if ( pos.y < screenHeight ) {
 			    this.setPosition( new cc.Point( pos.x, pos.y + 5 ) );
 			} else {
 			    this.setPosition( new cc.Point( pos.x, 0 ) );
 			}
 		}
-		else if(this.direction== Ship.DIR.RIGHT){
+		else if(this.direction== Ufo.DIR.RIGHT){
 			if ( pos.x < screenHeight ) {
 			    this.setPosition( new cc.Point( pos.x+5, pos.y ) );
 			} else {
@@ -25,7 +25,7 @@ var Ufo = cc.Sprite.extend({
 
 });
 
-Ship.DIR = {
+Ufo.DIR = {
     UP: 1,
     RIGHT: 2
 };

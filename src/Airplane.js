@@ -7,14 +7,14 @@ var Airplane = cc.Sprite.extend({
 
     update: function( dt ) {
 		var pos = this.getPosition();
-		if( this.direction == Ship.DIR.UP){
+		if( this.direction == Airplane.DIR.UP){
 			if ( pos.y < screenHeight ) {
 			    this.setPosition( new cc.Point( pos.x, pos.y + 5 ) );
 			} else {
 			    this.setPosition( new cc.Point( pos.x, 0 ) );
 			}
 		}
-		else if(this.direction== Ship.DIR.RIGHT){
+		else if(this.direction== Airplane.DIR.RIGHT){
 			if ( pos.x < screenHeight ) {
 			    this.setPosition( new cc.Point( pos.x+5, pos.y ) );
 			} else {
@@ -25,7 +25,7 @@ var Airplane = cc.Sprite.extend({
 
 });
 
-Ship.DIR = {
+Airplane.DIR = {
     UP: 1,
     RIGHT: 2
 };

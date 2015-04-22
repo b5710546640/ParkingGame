@@ -1,6 +1,5 @@
 var BoardGame = cc.LayerColor.extend({
 
-
     init: function() {
         this._super ( new cc.Color( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0 , 0 ) );
@@ -38,10 +37,19 @@ var BoardGame = cc.LayerColor.extend({
         this.ufo.scheduleUpdate();
 
         this.player = new Vehicle();
+        this.createRoadAtY = 0;
+        this.createRoadAtX = 0;
+
+        var layer1 = Array(33);
+        for (var i = layer1.length - 1; i >= 0; i--) {
+            layer1[i] = Array(23);
+        };
 
 
         return true;
     },
+
+    //Road 20x20 23,33
 
     selectVehicle: function(keyCode, event){
         if(keyCode == cc.KEY.q){
@@ -59,26 +67,69 @@ var BoardGame = cc.LayerColor.extend({
         else if(keyCode == cc.KEY.s){
             this.player = this.ship;
             console.log('Select SHIP');
-        }
+        } else return;
+        this.createRoadAtY = this.player.getPositionY();
+        this.createRoadAtX = this.player.getPositionX();
+    },
+
+    putRoadOnLayer: function(){
+        var i =0;
+        var direction=0;
+        
+        this.lastdirection=0;
+        // this.road
+                // for (var y = this.player.getPositionY();  y <= screenHeight-70 ;y+=25 ){
+                    //if(direction!=0 && this.lastdirection==direction*(-1)) ;
+                    //else{
+        i = Math.floor(Math.random()*4);
+        
+        if(i==0) direction=1;
+        else if(i==1) direction=-1;
+        else if(i==2) direction=2;
+        else direction = -2;
+        
+        switch( direction ) {
+            case 1:
+                this.createRoadAtY += 25;
+                this.createRoad( this.createRoadAtX, this.createRoadAtY );
+                break;
+            case -1:
+                this.createRoadAtY -= 25;
+                this.createRoad( this.createRoadAtX, this.createRoadAtY );
+                break;
+            case 2:
+                this.createRoadAtX += 25;
+                this.createRoad( this.createRoadAtX, this.createRoadAtY );
+                break;
+            case -2:
+                this.createRoadAtX -= 25;
+                this.createRoad( this.createRoadAtX, this.createRoadAtY );
+                break;
+                    //}
+           this.lastdirection=direction;
+  
+
+                // }
+                };
     },
 
 
     onKeyDown: function( keyCode, event ) {
         if ( keyCode == cc.KEY.space) {
+
+            this.putRoadOnLayer();
                 // console.log('gg');
                 //     var x = vehicle.get+Math.random()*100;
                 //     var y = screenHeight+Math.random()*100;
                 //     var down = Math.random()*100;
                 //     var up = Math.random()*100;
                 //     while ( ( y>=70  || y<= screenHeight-70 ) && (x <= screenWidth-70 || x>=70 )){
-                for (var y = 70 ;  y <= screenHeight-70 ;y+= Math.random()*100){
-                    this.createRoad(70,y);
-                }
-                };
+        }
         },
 
     createRoad: function(x, y) {
         var road = new Road(this.player);
+        // layer1[x][y] = ro
         road.setPosition( new cc.Point( x, y ));
 
         this.addChild( road );

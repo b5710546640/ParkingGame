@@ -36,6 +36,30 @@ var BoardGame = cc.LayerColor.extend({
         this.addChild( this.ufo );
         this.ufo.scheduleUpdate();
 
+        this.airplaneStorage = new AirplaneStore();
+        this.airplaneStorage.setPosition( new cc.Point( (screenWidth-70)/2, 70));
+
+        this.addChild( this.airplaneStorage );
+        this.airplaneStorage.scheduleUpdate();
+
+        this.bikeStorage = new BikeStore();
+        this.bikeStorage.setPosition( new cc.Point( 70 , (screenHeight-70)/2 ));
+
+        this.addChild( this.bikeStorage );
+        this.bikeStorage.scheduleUpdate();
+
+        this.carStorage = new CarStore();
+        this.carStorage.setPosition( new cc.Point( (screenWidth-70 )/2 , (screenHeight-70)/2 ));
+
+        this.addChild( this.carStorage );
+        this.carStorage.scheduleUpdate();
+
+        this.ufoStorage = new UFOStore();
+        this.ufoStorage.setPosition( new cc.Point( (screenWidth-70)/2 , 70 ));
+
+        this.addChild( this.ufoStorage );
+        this.ufoStorage.scheduleUpdate();
+
         this.player = new Vehicle();
         this.createRoadAtY = 0;
         this.createRoadAtX = 0;
@@ -136,11 +160,11 @@ var BoardGame = cc.LayerColor.extend({
         road.scheduleUpdate();
         },
 
-        // onKeyUp: function( keyCode, event ) {
-        //     //  if ( keyCode == cc.KEY.space ) {
-        //     //     // this.ship.switchDirection();
-        //     // }
-        // },
+        onKeyUp: function( keyCode, event ) {
+            //  if ( keyCode == cc.KEY.space ) {
+            //     // this.ship.switchDirection();
+            // }
+        },
 
 
     addKeyboardHandlers: function() {

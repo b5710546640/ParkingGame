@@ -18,6 +18,11 @@
         "src/Ship.js",
         "src/Ufo.js",
         "src/Road.js",
-        "src/BoardGame.js"
+        "src/BoardGame.js",
+        "src/Storage.js",
+        "src/AirplaneStore.js",
+        "src/BikeStore.js",
+        "src/CarStore.js",
+        "src/UFOStore.js"
     ]
 }

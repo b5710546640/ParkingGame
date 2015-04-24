@@ -1,8 +1,8 @@
-var BikeStore = Storage.extend({
+var ShipStore = Storage.extend({
 
     ctor: function() {
         this._super();
-        this.initWithFile( 'res/BikeStore.png' );
+        this.initWithFile( 'res/ShipStore.png' );
     }
 
 });

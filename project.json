@@ -21,7 +21,7 @@
         "src/BoardGame.js",
         "src/Storage.js",
         "src/AirplaneStore.js",
-        "src/BikeStore.js",
+        "src/ShipStore.js",
         "src/CarStore.js",
         "src/UFOStore.js"
     ]

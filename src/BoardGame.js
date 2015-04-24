@@ -12,57 +12,20 @@ var BoardGame = cc.LayerColor.extend({
 
         this.addKeyboardHandlers();
 
-        this.ship = new Ship();
-        this.ship.setPosition( new cc.Point( screenWidth-70 , 70));
-
-        this.addChild( this.ship );
-        this.ship.scheduleUpdate();
-
-        this.car = new Car();
-        this.car.setPosition( new cc.Point( 70, 70 ));
-
-        this.addChild( this.car );
-        this.car.scheduleUpdate();
-
-        this.airplane = new Airplane();
-        this.airplane.setPosition( new cc.Point( screenWidth-70 ,screenHeight-70));
-
-        this.addChild( this.airplane );
-        this.airplane.scheduleUpdate();
-
-        this.ufo = new Ufo();
-        this.ufo.setPosition( new cc.Point( 70, screenHeight-70));
-
-        this.addChild( this.ufo );
-        this.ufo.scheduleUpdate();
-
-        this.airplaneStorage = new AirplaneStore();
-        this.airplaneStorage.setPosition( new cc.Point( (screenWidth-70)/2, 70));
-
-        this.addChild( this.airplaneStorage );
-        this.airplaneStorage.scheduleUpdate();
-
-        this.bikeStorage = new BikeStore();
-        this.bikeStorage.setPosition( new cc.Point( 70 , (screenHeight-70)/2 ));
-
-        this.addChild( this.bikeStorage );
-        this.bikeStorage.scheduleUpdate();
-
-        this.carStorage = new CarStore();
-        this.carStorage.setPosition( new cc.Point( (screenWidth-70 )/2 , (screenHeight-70)/2 ));
-
-        this.addChild( this.carStorage );
-        this.carStorage.scheduleUpdate();
-
-        this.ufoStorage = new UFOStore();
-        this.ufoStorage.setPosition( new cc.Point( (screenWidth-70)/2 , 70 ));
-
-        this.addChild( this.ufoStorage );
-        this.ufoStorage.scheduleUpdate();
 
         this.player = new Vehicle();
         this.createRoadAtY = 0;
         this.createRoadAtX = 0;
+
+        this.addAirplane();
+        this.addCar();
+        this.addUFO();
+        this.addShip();
+
+        this.addStoreCar();
+        this.addStoreAirplane();
+        this.addStoreShip();
+        this.addStoreUFO();
 
         var layer1 = Array(33);
         for (var i = layer1.length - 1; i >= 0; i--) {
@@ -71,6 +34,75 @@ var BoardGame = cc.LayerColor.extend({
 
 
         return true;
+    },
+
+    addStoreCar: function(){
+        this.carStorage = new CarStore();
+        this.carStorage.setPosition( new cc.Point( (screenWidth-70 )/2 , (screenHeight-70)/2 ));
+
+        this.addChild( this.carStorage );
+        this.carStorage.scheduleUpdate();
+
+    },
+
+
+    addStoreAirplane: function(){
+        this.airplaneStorage = new AirplaneStore();
+        this.airplaneStorage.setPosition( new cc.Point( (screenWidth-70)/2, 70));
+
+        this.addChild( this.airplaneStorage );
+        this.airplaneStorage.scheduleUpdate();
+
+    },
+
+    addStoreShip: function(){
+        this.shipStorage = new ShipStore();
+        this.shipStorage.setPosition( new cc.Point( 70 , (screenHeight-70)/2 ));
+
+        this.addChild( this.shipStorage );
+        this.shipStorage.scheduleUpdate();
+
+    },
+
+    addStoreUFO: function(){        
+        this.ufoStorage = new UFOStore();
+        this.ufoStorage.setPosition( new cc.Point( (screenWidth-70)/2 , 70 ));
+
+        this.addChild( this.ufoStorage );
+        this.ufoStorage.scheduleUpdate();
+
+    },
+
+    addAirplane: function(){
+        this.airplane = new Airplane();
+        this.airplane.setPosition( new cc.Point( screenWidth-70 ,screenHeight-70));
+
+        this.addChild( this.airplane );
+        this.airplane.scheduleUpdate();
+    },
+
+    addCar: function(){
+        this.car = new Car();
+        this.car.setPosition( new cc.Point( 70, 70 ));
+
+        this.addChild( this.car );
+        this.car.scheduleUpdate();
+    },
+
+    addUFO: function(){
+        this.ufo = new Ufo();
+        this.ufo.setPosition( new cc.Point( 70, screenHeight-70));
+
+        this.addChild( this.ufo );
+        this.ufo.scheduleUpdate();
+    },
+
+    addShip: function(){
+        this.ship = new Ship();
+        this.ship.setPosition( new cc.Point( screenWidth-70 , 70));
+
+        this.addChild( this.ship );
+        this.ship.scheduleUpdate();
     },
 
     //Road 20x20 23,33

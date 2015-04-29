@@ -14,6 +14,7 @@ var BoardGame = cc.LayerColor.extend({
 
 
         this.player = new Vehicle();
+        // this.road = new 
         this.createRoadAtY = 0;
         this.createRoadAtX = 0;
 
@@ -27,21 +28,25 @@ var BoardGame = cc.LayerColor.extend({
         this.addStoreShip();
         this.addStoreUFO();
 
-        var layer1 = Array(33);
-        for (var i = layer1.length - 1; i >= 0; i--) {
-            layer1[i] = Array(23);
-        };
-
+        this.drawTheMaze();
 
         return true;
     },
 
+    drawTheMaze: function(){
+        this.maze = new Maze();
+        this.maze.setPosition( cc.p( 150, 150 ) );
+        this.maze.scheduleUpdate();
+        this.addChild( this.maze );
+    },
+
     addStoreCar: function(){
         this.carStorage = new CarStore();
-        this.carStorage.setPosition( new cc.Point( (screenWidth-70 )/2 , (screenHeight-70)/2 ));
+        this.carStorage.setPosition( new cc.Point( (screenWidth)/2 , screenHeight-70 ));
 
         this.addChild( this.carStorage );
         this.carStorage.scheduleUpdate();
+        console.log('Show car storage');
 
     },
 
@@ -52,25 +57,25 @@ var BoardGame = cc.LayerColor.extend({
 
         this.addChild( this.airplaneStorage );
         this.airplaneStorage.scheduleUpdate();
-
+        console.log('Show airplane storage');
     },
 
     addStoreShip: function(){
         this.shipStorage = new ShipStore();
-        this.shipStorage.setPosition( new cc.Point( 70 , (screenHeight-70)/2 ));
+        this.shipStorage.setPosition( new cc.Point( 70 , (screenHeight)/2 ));
 
         this.addChild( this.shipStorage );
         this.shipStorage.scheduleUpdate();
-
+        console.log('Show ship storage');
     },
 
     addStoreUFO: function(){        
         this.ufoStorage = new UFOStore();
-        this.ufoStorage.setPosition( new cc.Point( (screenWidth-70)/2 , 70 ));
+        this.ufoStorage.setPosition( new cc.Point( screenWidth-70, (screenHeight)/2  ));
 
         this.addChild( this.ufoStorage );
         this.ufoStorage.scheduleUpdate();
-
+        console.log('Show UFO storage');
     },
 
     addAirplane: function(){
@@ -126,6 +131,25 @@ var BoardGame = cc.LayerColor.extend({
         } else return;
         this.createRoadAtY = this.player.getPositionY();
         this.createRoadAtX = this.player.getPositionX();
+    },
+
+    selectStore: function(keyCode,event){
+         if(keyCode == cc.KEY.e){
+            this.player = this.ufo;
+            console.log('Select UFO');
+        }
+        else if(keyCode == cc.KEY.r){
+            this.player = this.airplane;
+            console.log('Select AIRPLANE');
+        }
+        else if(keyCode == cc.KEY.d){
+            this.player = this.car;
+            console.log('Select CAR');
+        }
+        else if(keyCode == cc.KEY.f){
+            this.player = this.ship;
+            console.log('Select SHIP');
+        } else return;
     },
 
     putRoadOnLayer: function(){

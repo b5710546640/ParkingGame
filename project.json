@@ -18,6 +18,7 @@
         "src/Ship.js",
         "src/Ufo.js",
         "src/Road.js",
+        "src/Maze.js",
         "src/BoardGame.js",
         "src/Storage.js",
         "src/AirplaneStore.js",

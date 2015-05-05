@@ -12,6 +12,8 @@
 
     "jsList" : [
         "src/resource.js",
+        "src/MainMenu.js",
+        "src/PlayScene.js",
         "src/Vehicle.js",
         "src/Airplane.js",
         "src/Car.js",
@@ -19,11 +21,15 @@
         "src/Ufo.js",
         "src/Road.js",
         "src/Maze.js",
+        "src/Maze2.js",
+        "src/Maze3.js",
+        "src/Maze4.js",
         "src/BoardGame.js",
         "src/Storage.js",
         "src/AirplaneStore.js",
         "src/ShipStore.js",
         "src/CarStore.js",
         "src/UFOStore.js"
+        
     ]
 }

@@ -14,6 +14,7 @@
         "src/resource.js",
         "src/MainMenu.js",
         "src/PlayScene.js",
+        "src/ResultScene.js",
         "src/Vehicle.js",
         "src/Airplane.js",
         "src/Car.js",

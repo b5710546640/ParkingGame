@@ -7,8 +7,11 @@ var MainMenu = cc.LayerColor.extend({
 	init: function(){
 		this._super();
 		var bg = new cc.Sprite.create(res._menu);
+    var pressEnterR = new cc.Sprite.create(res.pressEnterR);
 		bg.setPosition(new cc.p(screenWidth/2,screenHeight/2));
+    pressEnterR.setPosition(new cc.p((screenWidth/2)-30,(screenHeight/2)-180));
 		this.addChild(bg);
+    this.addChild(pressEnterR);
 		this.addKeyboardHandlers();
 	},
 

@@ -14,7 +14,6 @@ var BoardGame = cc.LayerColor.extend({
 
         this.addKeyboardHandlers();
 
-        // this.road = new 
         this.createRoadAtY = 0;
         this.createRoadAtX = 0;
 
@@ -28,7 +27,6 @@ var BoardGame = cc.LayerColor.extend({
         this.addStoreShip();
         this.addStoreUFO();
 
-        // this.drawTheMaze();
         this.selectVehicle();
         this.setSelectListMaze();
         this.setSelectListMaze2();
@@ -46,43 +44,7 @@ var BoardGame = cc.LayerColor.extend({
         return true;
     },
 
-    getRect: function(){
-        var spriteRect = this.getBoundingBoxToWorld();
-        var spritePos = this.getPosition();
-
-        var dX = this.x - spritePos.x;
-        var dY = this.y - spritePos.y;
-        return cc.rect( spriteRect.x + dX,
-                        spriteRect.y + dY,
-                        spriteRect.width,
-                        spriteRect.height );
-    },
-
-    // addMouseHandler: function(){
-    //  cc.eventManager.addListener({
-    //     event: cc.EventListener.MOUSE,
-    //     onMouseMove: function(event){
-    //         var str = "MousePosition X: " + event.getLocationX() + "  Y:" + event.getLocationY();
-    //         // do something...
-    //     },
-    //     onMouseUp: function(event){
-    //         var str = "Mouse Up detected, Key: " + event.getButton();
-    //         // do something...
-    //     },
-    //     onMouseDown: function(event){
-    //         var str = "MousePosition X: " + event.getLocationX() + "  Y:" + event.getLocationY();
-    //         console.log( str );
-    //         var str = "Mouse Down detected, Key: " + event.getButton();
-    //         if((event.getLocationX>screenWidth/2-115 || event.getLocationX<(screenWidth/2)+115) && (event.getLocationY>(screenHeight/2)-85 || event.getLocationY<(screenWidth/2)+85))
-    //         {this.road = this.maze;
-    //         console.log('Select pic');
-    //         }
-    //     },
-    //     onMouseScroll: function(event){
-    //         var str = "Mouse Scroll detected, X: " + event.getLocationX() + "  Y:" + event.getLocationY();
-    //         // do something...
-    //     }
-    // },this);
+    // getPlayerFromIndex :function( indexPlayer ){
 
     // },
 
@@ -124,27 +86,17 @@ var BoardGame = cc.LayerColor.extend({
 
     showStartScene : function(road){
             nowPlayer = boardGame.getPlayer();
-            this.x = nowPlayer.getPositionX();
-            this.y = nowPlayer.getPositionY();
+            this.posX = nowPlayer.getPositionX();
+            this.posY = nowPlayer.getPositionY();
             nowRoad = road;
-            console.log('Button select1');
+            console.log('Button select1',this.posX,this.posY);
             console.log(boardGame.checkIndexFromRoad(nowRoad));
             this.i = boardGame.checkIndexFromRoad(nowRoad);
             console.log(boardGame.checkIndexFromPlayer(nowPlayer));
             this.j = boardGame.checkIndexFromPlayer(nowPlayer);
-            // console.log(this.x);
-            // console.log(this.y);
-            cc.director.runScene(new RunScene(this.j , this.i ));
+            cc.director.runScene(new RunScene(this.j , this.i , this.posX , this.posY ));
 
     },
-
-    // getNowPosXPlayer : function(player){
-    //     return player.getPosition();
-    // },
-
-    // getNowPosYPlayer : function(){
-    //     return player.getPosition();
-    // },
 
     setSelectListMaze: function()
     {
@@ -208,12 +160,6 @@ var BoardGame = cc.LayerColor.extend({
 
     },
 
-    drawTheMaze: function(){
-        this.maze = new Maze();
-        this.maze.setPosition( cc.p( 150, 150 ) );
-        this.maze.scheduleUpdate();
-        this.addChild( this.maze );
-    },
 
     addStoreCar: function(){
         this.carStorage = new CarStore();
@@ -254,38 +200,29 @@ var BoardGame = cc.LayerColor.extend({
     },
 
     addAirplane: function(){
-        this.airplane = new Airplane();
-        this.airplane.setPosition( new cc.Point( screenWidth-70 ,screenHeight-70));
-
+        this.airplane = new Airplane(screenWidth-70 ,screenHeight-70);
         this.addChild( this.airplane );
         this.airplane.scheduleUpdate();
     },
 
     addCar: function(){
-        this.car = new Car();
-        this.car.setPosition( new cc.Point( 70, 70 ));
-
+        this.car = new Car(70,70);
         this.addChild( this.car );
         this.car.scheduleUpdate();
     },
 
     addUFO: function(){
-        this.ufo = new Ufo();
-        this.ufo.setPosition( new cc.Point( 70, screenHeight-70));
-
+        this.ufo = new Ufo( 70, screenHeight-70);
         this.addChild( this.ufo );
         this.ufo.scheduleUpdate();
     },
 
     addShip: function(){
-        this.ship = new Ship();
-        this.ship.setPosition( new cc.Point( screenWidth-70 , 70));
-
+        this.ship = new Ship(screenWidth-70 , 70);
         this.addChild( this.ship );
         this.ship.scheduleUpdate();
     },
 
-    //Road 20x20 23,33
 
     selectVehicle: function(keyCode, event){
         if(keyCode == cc.KEY.q){
@@ -332,10 +269,7 @@ var BoardGame = cc.LayerColor.extend({
         var direction=0;
         
         this.lastdirection=0;
-        // this.road
-                // for (var y = this.player.getPositionY();  y <= screenHeight-70 ;y+=25 ){
-                    //if(direction!=0 && this.lastdirection==direction*(-1)) ;
-                    //else{
+
         i = Math.floor(Math.random()*4);
         
         if(i==0) direction=1;
@@ -360,11 +294,9 @@ var BoardGame = cc.LayerColor.extend({
                 this.createRoadAtX -= 25;
                 this.createRoad( this.createRoadAtX, this.createRoadAtY );
                 break;
-                    //}
+
            this.lastdirection=direction;
   
-
-                // }
                 };
     },
 
@@ -373,18 +305,13 @@ var BoardGame = cc.LayerColor.extend({
         if ( keyCode == cc.KEY.space) {
 
             this.putRoadOnLayer();
-                // console.log('gg');
-                //     var x = vehicle.get+Math.random()*100;
-                //     var y = screenHeight+Math.random()*100;
-                //     var down = Math.random()*100;
-                //     var up = Math.random()*100;
-                //     while ( ( y>=70  || y<= screenHeight-70 ) && (x <= screenWidth-70 || x>=70 )){
+              
         }
         },
 
     createRoad: function(x, y) {
         var road = new Road(this.player);
-        // layer1[x][y] = ro
+
         road.setPosition( new cc.Point( x, y ));
 
         this.addChild( road );
@@ -392,9 +319,7 @@ var BoardGame = cc.LayerColor.extend({
         },
 
         onKeyUp: function( keyCode, event ) {
-            //  if ( keyCode == cc.KEY.space ) {
-            //     // this.ship.switchDirection();
-            // }
+
         },
 
 
@@ -408,10 +333,7 @@ var BoardGame = cc.LayerColor.extend({
                 self.selectVehicle(keyCode, event);
                 console.log('kkkk3');
             },
-            // onKeyReleased: function( keyCode, event ) {
-            //     self.onKeyUp( keyCode, event );
-            //     console.log('kkkk4');
-            // }
+
         }, this);
     }
 

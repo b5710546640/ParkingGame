@@ -3,12 +3,18 @@ var Maze4 = Road.extend({
         this._super();
         this.WIDTH = 20;
         this.HEIGHT = 12;
+        this.startX = 0;
+        this.startY = 5;
+        this.endX = 19;
+        this.endY = 18;
+        this.terminal = 4;
         this.MAP = [
             '####################',
             '#...#...#...#....#.#',
             '#.#.###.#.#.####.#.#',
             '#.#.#...###.#..#.#.#',
             '###.#.#..#....##...#',
+            
             '..#.#.#.####.###.#.#',
             '#.....#.......#..#.#',
             '###.#####.###.#.####',
@@ -30,5 +36,9 @@ var Maze4 = Road.extend({
         }
         }
     }
+    },
+    
+    getStorage: function(){
+        return  this.terminal;
     }
 });

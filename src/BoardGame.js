@@ -1,6 +1,11 @@
+var score = 0;
+
 var BoardGame = cc.LayerColor.extend({
 
-
+    ctor: function(){
+        this._super();
+        this.init();
+    },
 
     init: function() {
         this._super ( new cc.Color( 127, 127, 127, 255 ) );
@@ -10,9 +15,7 @@ var BoardGame = cc.LayerColor.extend({
         
         this.setBackground = new cc.Sprite.create( res.bg );
         this.setBackground.setPosition( new cc.Point( screenWidth/2 , screenHeight/2 ) );
-        this.addChild(this.setBackground);
-
-        this.addKeyboardHandlers();
+        this.addChild(this.setBackground);     
 
         this.createRoadAtY = 0;
         this.createRoadAtX = 0;
@@ -26,6 +29,8 @@ var BoardGame = cc.LayerColor.extend({
         this.addStoreAirplane();
         this.addStoreShip();
         this.addStoreUFO();
+
+        this.addKeyboardHandlers();
 
         this.selectVehicle();
         this.setSelectListMaze();
@@ -44,9 +49,9 @@ var BoardGame = cc.LayerColor.extend({
         return true;
     },
 
-    // getPlayerFromIndex :function( indexPlayer ){
-
-    // },
+    setScore :function( newScore ){
+        score = newScore;
+    },
 
     getPlayer : function(){
         return this.player;
@@ -89,13 +94,15 @@ var BoardGame = cc.LayerColor.extend({
             this.posX = nowPlayer.getPositionX();
             this.posY = nowPlayer.getPositionY();
             nowRoad = road;
-            console.log('Button select1',this.posX,this.posY);
+            console.log('Button select1',this.posX,this.posY,score);
             console.log(boardGame.checkIndexFromRoad(nowRoad));
             this.i = boardGame.checkIndexFromRoad(nowRoad);
             console.log(boardGame.checkIndexFromPlayer(nowPlayer));
             this.j = boardGame.checkIndexFromPlayer(nowPlayer);
-            cc.director.runScene(new RunScene(this.j , this.i , this.posX , this.posY ));
-
+            if(this.j>0 && this.i>0){
+            cc.director.runScene(new RunScene(this.j , this.i , this.posX , this.posY , score));
+            }
+            else console.log('Please Select Player');
     },
 
     setSelectListMaze: function()
@@ -340,10 +347,22 @@ var BoardGame = cc.LayerColor.extend({
 });
  
 var StartScene = cc.Scene.extend({
+
     onEnter: function() {
         this._super();
-        var layer = new BoardGame();
-        layer.init();
-        this.addChild( layer );
+        // score = nowScore;
+        this.layer = new BoardGame();
+        this.addChild( this.layer );
     }
 });
+
+// var NextScene = cc.Scene.extend({
+//    ctor: function(nowScore) {
+
+//         this._super();
+//         score = nowScore;
+//         var layer = new BoardGame(score);
+//         layer.init();
+//         this.addChild( layer );
+//     }
+// });

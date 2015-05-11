@@ -39,13 +39,13 @@ var Maze = Road.extend({
 
     getStorage: function(){
         return  this.terminal;
-    },
-
-    getMaze: function(){
-        return this.MAP;
-    },
-
-    setMaze: function(maze){
-       this._super(maze);
     }
+
+    // getMaze: function(){
+    //     return this.MAP;
+    // },
+
+    // setMaze: function(maze){
+    //    this._super(maze);
+    // }
 });

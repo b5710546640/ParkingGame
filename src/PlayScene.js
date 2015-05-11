@@ -1,8 +1,10 @@
 var PlayScene = cc.LayerColor.extend({
 
-	ctor: function(player , mazeNO ,x,y){
+	ctor: function(player , mazeNO ,x,y, newScore){
 
 	this._super();
+
+    this.score = newScore;
 
     if(player == 1 )
     {
@@ -48,7 +50,7 @@ var PlayScene = cc.LayerColor.extend({
     console.log(player,this.X);
     console.log(mazeNO,this.Y);
 
-    console.log('in ctor'+x+' '+y);
+    console.log('in ctor'+x+' '+y+'Score :'+this.score);
 	},
 
 	init: function(  ){
@@ -103,8 +105,8 @@ var PlayScene = cc.LayerColor.extend({
     onKeyUp: function( keyCode, event ) {
         console.log(keyCode);
          if(keyCode== cc.KEY.enter){
-            console.log('into');
-            cc.director.runScene(new EndScene(this.indexPlayer,this.indexMaze));
+            console.log('into'+"this.score :"+this.score);
+            cc.director.runScene(new EndScene(this.indexPlayer,this.indexMaze,this.X, this.Y, this.score));
         }
         this.player.setNextDirection( Vehicle.DIR.STILL );
     },
@@ -119,15 +121,18 @@ var PlayScene = cc.LayerColor.extend({
 
 var RunScene = cc.Scene.extend({
 
-  ctor: function( receivedPlayer , receivedMaze , x , y ){
+  ctor: function( receivedPlayer , receivedMaze , x , y , newScore ){
     this._super();
     this.playerSent = receivedPlayer;
     this.mazeSent = receivedMaze;
     this.newX = x;
     this.newY = y;
-    var layer = new PlayScene(this.playerSent  ,this.mazeSent , this.newX , this.newY);
+    this.newScore = newScore;
+    if(this.playerSent>0){
+    var layer = new PlayScene(this.playerSent  ,this.mazeSent , this.newX , this.newY , this.newScore );
     layer.init();
     this.addChild( layer );
-
+    }
+    else console.log('Don t have player');
   }
 });

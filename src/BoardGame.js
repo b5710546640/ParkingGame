@@ -8,6 +8,7 @@ var BoardGame = cc.LayerColor.extend({
     },
 
     init: function() {
+        this._super();
         this._super ( new cc.Color( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0 , 0 ) );
         console.log( 'GameLayer created' );
@@ -45,6 +46,14 @@ var BoardGame = cc.LayerColor.extend({
         var nowPlayer = this.getPlayer();
         var nowRoad = this.road;
         var boardGame = this;
+
+        // this.labelPlayer = cc.LabelTTF.create( 'Player :'+this.player , 'Arial' , 30);
+        // this.labelPlayer.setPosition( new cc.Point(screenWidth-200 , screenHeight-70 ));
+        // this.addChild( this.labelPlayer);
+
+        // this.labelRoad = cc.LabelTTF.create( 'Road :'+this.road , 'Arial' , 30);
+        // this.labelRoad.setPosition( new cc.Point(screenWidth-200 , screenHeight-170 ));
+        // this.addChild( this.labelRoad);
 
         return true;
     },
@@ -176,6 +185,7 @@ var BoardGame = cc.LayerColor.extend({
         this.carStorage.scheduleUpdate();
         console.log('Show car storage');
 
+
     },
 
 
@@ -195,6 +205,7 @@ var BoardGame = cc.LayerColor.extend({
         this.addChild( this.shipStorage );
         this.shipStorage.scheduleUpdate();
         console.log('Show ship storage');
+
     },
 
     addStoreUFO: function(){        
@@ -204,30 +215,49 @@ var BoardGame = cc.LayerColor.extend({
         this.addChild( this.ufoStorage );
         this.ufoStorage.scheduleUpdate();
         console.log('Show UFO storage');
+
     },
 
     addAirplane: function(){
         this.airplane = new Airplane(screenWidth-70 ,screenHeight-70);
         this.addChild( this.airplane );
         this.airplane.scheduleUpdate();
+
+        this.lbAirplane = cc.LabelTTF.create( 'press W' , 'Arial' , 30);
+        this.lbAirplane.setPosition(  new cc.Point( screenWidth-70, screenHeight-120 ));
+        this.addChild( this.lbAirplane );
+
     },
 
     addCar: function(){
         this.car = new Car(70,70);
         this.addChild( this.car );
         this.car.scheduleUpdate();
+
+
+        this.lbCar = cc.LabelTTF.create( 'press A' , 'Arial' , 30);
+        this.lbCar.setPosition(  new cc.Point( 80 , 120 ));
+        this.addChild( this.lbCar );
     },
 
     addUFO: function(){
         this.ufo = new Ufo( 70, screenHeight-70);
         this.addChild( this.ufo );
         this.ufo.scheduleUpdate();
+
+        this.lbUFO = cc.LabelTTF.create( 'press Q' , 'Arial' , 30);
+        this.lbUFO.setPosition(  new cc.Point( 80 , screenHeight-120 ));
+        this.addChild( this.lbUFO );
     },
 
     addShip: function(){
         this.ship = new Ship(screenWidth-70 , 70);
         this.addChild( this.ship );
         this.ship.scheduleUpdate();
+
+        this.lbShip = cc.LabelTTF.create( 'press S' , 'Arial' , 30);
+        this.lbShip.setPosition(  new cc.Point( screenWidth-70 , 120 ));
+        this.addChild( this.lbShip );
     },
 
 
@@ -344,6 +374,14 @@ var BoardGame = cc.LayerColor.extend({
         }, this);
     }
 
+    //     update: function(dt) {
+
+    //     this.labelPlayer.setString( nowPlayer );
+    //     this.labelRoad.setString( nowRoad);
+
+    // }
+
+
 });
  
 var StartScene = cc.Scene.extend({
@@ -351,18 +389,19 @@ var StartScene = cc.Scene.extend({
     onEnter: function() {
         this._super();
         // score = nowScore;
-        this.layer = new BoardGame();
-        this.addChild( this.layer );
+        var layer = new BoardGame();
+        layer.init();
+        this.addChild( layer );
     }
 });
 
-// var NextScene = cc.Scene.extend({
-//    ctor: function(nowScore) {
+var NextScene = cc.Scene.extend({
+   onEnter: function(nowScore) {
 
-//         this._super();
-//         score = nowScore;
-//         var layer = new BoardGame(score);
-//         layer.init();
-//         this.addChild( layer );
-//     }
-// });
+        this._super();
+        score = nowScore;
+        var layer = new BoardGame(score);
+        layer.init();
+        this.addChild( layer );
+    }
+});

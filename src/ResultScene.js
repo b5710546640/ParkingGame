@@ -45,13 +45,15 @@ var ResultScene = cc.LayerColor.extend({
     this.rightStore = this.maze.getStorage();
     this.selectStore = this.player.getMatch();
     this.isTrue = (this.rightStore == this.selectStore);
-
+    this.addKeyboardHandlers();
     this.init();
     console.log('SCORE :'+this.score);
+
 
 	},
 
 	init: function(  ){
+        // this._super();
         if(this.isTrue) this.score++;
         console.log('UPDATE: '+this.score);
         
@@ -67,6 +69,16 @@ var ResultScene = cc.LayerColor.extend({
         this.addChild(this.setBackground , 1);
        
         
+        // this.canSe = new cc.MenuItemImage( res.pressEnter, res.pressEnterR, function()
+        // {
+        //     console.log('Click');
+        //    cc.director.runScene(new NextScene(this.score));
+        // },this);
+
+        // this.Selec = new cc.Menu( this.canSe);
+        // this.Selec.setPosition( new cc.Point( 270 , screenHeight-400  ) );
+        // this.addChild(this.Selec,2);
+
         this.scheduleUpdate();
         this.addKeyboardHandlers();
 
@@ -96,7 +108,7 @@ var ResultScene = cc.LayerColor.extend({
     },
 
 
-  addKeyboardHandlers: function() {
+    addKeyboardHandlers: function() {
         var self = this;
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
@@ -108,20 +120,22 @@ var ResultScene = cc.LayerColor.extend({
             }
         }, this);
     },
+    
     onKeyDown: function( keyCode, event ) {
         
     },
     
+    
     onKeyUp: function( keyCode, event ) {
         if (keyCode == cc.KEY.enter) {
-            console.log('enter');
+           
             cc.director.runScene(new StartScene());
         }
     },
 
     update: function(dt) {
         this.labelScore.setString(this.score);
-
+        
     }
 
 

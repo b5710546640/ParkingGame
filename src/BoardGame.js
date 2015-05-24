@@ -16,8 +16,9 @@ var BoardGame = cc.LayerColor.extend({
         
         this.setBackground = new cc.Sprite.create( res.bg );
         this.setBackground.setPosition( new cc.Point( screenWidth/2 , screenHeight/2 ) );
-        this.addChild(this.setBackground);     
+        this.addChild(this.setBackground); 
 
+       
         this.createRoadAtY = 0;
         this.createRoadAtX = 0;
 
@@ -262,22 +263,29 @@ var BoardGame = cc.LayerColor.extend({
 
 
     selectVehicle: function(keyCode, event){
+         var dotVehicle = new cc.Sprite.create( res.selectVeh );
         if(keyCode == cc.KEY.q){
             this.player = this.ufo;
             console.log('Select UFO');
+            dotVehicle.setPosition( new cc.Point( this.player.getPositionX() , this.player.getPositionY()));  
         }
         else if(keyCode == cc.KEY.w){
             this.player = this.airplane;
             console.log('Select AIRPLANE');
+            dotVehicle.setPosition( new cc.Point( this.player.getPositionX() , this.player.getPositionY()));  
         }
         else if(keyCode == cc.KEY.a){
             this.player = this.car;
             console.log('Select CAR');
+            dotVehicle.setPosition( new cc.Point( this.player.getPositionX() , this.player.getPositionY()));  
         }
         else if(keyCode == cc.KEY.s){
             this.player = this.ship;
             console.log('Select SHIP');
+            dotVehicle.setPosition( new cc.Point( this.player.getPositionX() , this.player.getPositionY()));  
         } else return;
+                console.log(dotVehicle);
+        this.addChild(dotVehicle);
         this.createRoadAtY = this.player.getPositionY();
         this.createRoadAtX = this.player.getPositionX();
     },
@@ -298,7 +306,8 @@ var BoardGame = cc.LayerColor.extend({
         else if(keyCode == cc.KEY.f){
             this.player = this.ship;
             console.log('Select SHIP');
-        } else return;
+        }
+
     },
 
     putRoadOnLayer: function(){
@@ -390,17 +399,6 @@ var StartScene = cc.Scene.extend({
         this._super();
         // score = nowScore;
         var layer = new BoardGame();
-        layer.init();
-        this.addChild( layer );
-    }
-});
-
-var NextScene = cc.Scene.extend({
-   onEnter: function(nowScore) {
-
-        this._super();
-        score = nowScore;
-        var layer = new BoardGame(score);
         layer.init();
         this.addChild( layer );
     }

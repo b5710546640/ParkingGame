@@ -53,11 +53,18 @@ var ResultScene = cc.LayerColor.extend({
 	},
 
 	init: function(  ){
-        // this._super();
-        if(this.isTrue) this.score++;
+        this.labelStatus = cc.LabelTTF.create( 'Wrong Matching' , 'Arial' , 60);
+        this.labelStatus.setPosition( new cc.Point(screenWidth/2  , screenHeight/2 +50 ));
+        if(this.isTrue){ 
+            this.score++;
+        this.labelStatus.setString('Correct Matching!!!');
+        }
         console.log('UPDATE: '+this.score);
+
         
-        this.labelScore = cc.LabelTTF.create( 'Your score :'+this.score , 'Arial' , 40);
+        
+        
+        this.labelScore = cc.LabelTTF.create( 'IIYour score :'+this.score , 'Arial' , 40);
         this.labelScore.setPosition( new cc.Point(screenWidth/2 , screenHeight/2 ));
         
         this.setStorage(this.selectStore);
@@ -66,18 +73,8 @@ var ResultScene = cc.LayerColor.extend({
         this.setBackground = new cc.Sprite.create( res.bg );
         this.setBackground.setPosition( new cc.Point( screenWidth/2 , screenHeight/2 ) );
         this.addChild( this.labelScore ,2 );
+        this.addChild( this.labelStatus ,2 );
         this.addChild(this.setBackground , 1);
-       
-        
-        // this.canSe = new cc.MenuItemImage( res.pressEnter, res.pressEnterR, function()
-        // {
-        //     console.log('Click');
-        //    cc.director.runScene(new NextScene(this.score));
-        // },this);
-
-        // this.Selec = new cc.Menu( this.canSe);
-        // this.Selec.setPosition( new cc.Point( 270 , screenHeight-400  ) );
-        // this.addChild(this.Selec,2);
 
         this.scheduleUpdate();
         this.addKeyboardHandlers();
@@ -129,13 +126,13 @@ var ResultScene = cc.LayerColor.extend({
     onKeyUp: function( keyCode, event ) {
         if (keyCode == cc.KEY.enter) {
            
-            cc.director.runScene(new StartScene());
+            cc.director.runScene(new NextScene());
         }
     },
 
     update: function(dt) {
         this.labelScore.setString(this.score);
-        
+        // this.labelStatus.setString(this.state);
     }
 
 
@@ -159,4 +156,14 @@ var EndScene = cc.Scene.extend({
     this.addChild( layer );
     console.log('onEnter :'+this.newScore);
   }
+});
+
+var NextScene = cc.Scene.extend({
+    ctor: function( newScore ){
+    this._super();
+    },
+   onEnter: function() {
+    var layer = new BoardGame();
+    this.addChild( layer );
+    }
 });

@@ -11,7 +11,9 @@ var res = {
     select4 : "res/selectItem4.png",
     bg : "res/bg.jpg",
     onPlayAgain : "res/onPlayagain.png",
-    playAgain : "res/playagain.png"
+    playAgain : "res/playagain.png",
+    dot : "res/dot.png",
+    selectVeh : "res/selected.png"
 };
 
 var g_resources = [];

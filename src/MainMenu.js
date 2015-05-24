@@ -34,8 +34,7 @@ var MainMenu = cc.LayerColor.extend({
     
     onKeyUp: function( keyCode, event ) {
         if (keyCode == cc.KEY.enter) {
-          startScene = new StartScene();
-            cc.director.runScene(startScene);
+            cc.director.runScene(new StartScene());
         }
     },
     
